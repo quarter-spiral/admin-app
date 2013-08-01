@@ -1,0 +1,16 @@
+.health {
+  .chart-preload {
+    visibility: hidden;
+    height: 1px;
+  }
+
+  .carousel {
+    .item {
+      text-align: center;
+    }
+
+    .carousel-inner > .item.loading {
+      display: block;
+    }
+  }
+}

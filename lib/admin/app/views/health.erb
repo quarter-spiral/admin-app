@@ -1,0 +1,38 @@
+<div class="row health">
+  <% @charts.each do |id, chart| %>
+    <div class="col-lg-12" id="<%= id %>">
+      <h4><%=h chart['title'] %></h4>
+      <% chart_id = "charts-#{id}" %>
+      <div id="<%= chart_id %>" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#<%= chart_id %>" data-slide-to="0" class="active"></li>
+          <li data-target="#<%= chart_id %>" data-slide-to="1"></li>
+          <li data-target="#<%= chart_id %>-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active loading">
+            <iframe class="chart" src="https://heroku.newrelic.com/public/charts/<%= chart['30mins'] %>" width="500" height="300" scrolling="no" frameborder="no"></iframe>
+          </div>
+          <div class="item loading">
+            <iframe class="chart" src="https://heroku.newrelic.com/public/charts/<%= chart['12hours'] %>" width="500" height="300" scrolling="no" frameborder="no"></iframe>
+          </div>
+          <div class="item loading">
+            <iframe class="chart" src="https://heroku.newrelic.com/public/charts/<%= chart['7days'] %>" width="500" height="300" scrolling="no" frameborder="no"></iframe>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#<%= chart_id %>" data-slide="prev">
+          <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#<%= chart_id %>" data-slide="next">
+          <span class="icon-next"></span>
+        </a>
+      </div>
+    </div>
+  <% end %>
+</div>
+

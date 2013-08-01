@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <h1>Dashboard</h1>
+  <p class="lead">The most important data at a glance</p>
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Players</h4>
+    <p><%= @metrics['players'] %></p>
+
+    <h4>Signups Today</h4>
+    <p><%= @metrics['signups']['today'] %></p>
+
+    <h4>Money Made Today</h4>
+    <p>$<%= @metrics['money_made']['today'] %></p>
+  </div>
+
+  <div class="col-lg-6">
+    <h4>Plays</h4>
+    <p><%= @metrics['plays'] %></p>
+
+    <h4>Signups This Week</h4>
+    <p><%= @metrics['signups']['this_week'] %></p>
+
+    <h4>Money Made This Week</h4>
+    <p>$<%= @metrics['money_made']['this_week'] %></p>
+  </div>
+</div>
