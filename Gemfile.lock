@@ -6,6 +6,7 @@ PATH
       coffee-script
       newrelic_rpm
       ping-middleware (~> 0.0.2)
+      qs-heroku-client (>= 0.0.2)
       rack-ssl-enforcer
       sass
       sinatra (~> 1.3.3)
@@ -63,6 +64,8 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     ping-middleware (0.0.2)
+    qs-heroku-client (0.0.2)
+      faraday
     rack (1.5.2)
     rack-protection (1.5.0)
       rack

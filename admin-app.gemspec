@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'auth-middleware', '>= 0.0.2'
   spec.add_dependency 'tracking-client'
+  spec.add_dependency 'qs-heroku-client', '>= 0.0.2'
 
   spec.add_dependency 'sinatra', '~> 1.3.3'
   spec.add_dependency 'sprockets'

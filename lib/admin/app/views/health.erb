@@ -1,7 +1,38 @@
 <div class="row health">
   <% @charts.each do |id, chart| %>
-    <div class="col-lg-12" id="<%= id %>">
-      <h4><%=h chart['title'] %></h4>
+    <div class="app col-lg-12" id="<%= id %>">
+      <div class="top">
+        <h4><%=h chart['title'] %></h4>
+        <div class="dynos">
+          <% dynos = @dynos[id] %>
+          <% if dynos %>
+            <% if dynos['web'] %>
+              <%= dynos['web']['quantity'] %> Web <%= dynos == 1 ? 'Dyno' : 'Dynos' %> (<%= dynos['web']['size'] %>) | Change to
+              <form action="/dynos/<%= id %>/web" method="post" class="form form-inline">
+                <input type="text" name="quantity" value="<%= dynos['web']['quantity'] %>" />
+                <select name="size">
+                  <option value="1x" <% if dynos['web']['size'] == '1x' %>selected<% end %>>1X</option>
+                  <option value="2x" <% if dynos['web']['size'] == '2x' %>selected<% end %>>2X</option>
+                </select>
+                <input type="submit" value="Save">
+              </form>
+            <% end %>
+            <% if dynos['worker'] %>
+              <%= dynos['worker']['quantity'] %> Worker <%= dynos == 1 ? 'Dyno' : 'Dynos' %> (<%= dynos['worker']['size'] %>) | Change to
+              <form action="/dynos/<%= id %>/worker" method="post" class="form form-inline">
+                <input type="text" name="quantity" value="<%= dynos['worker']['quantity'] %>" />
+                <select name="size">
+                  <option value="1x" <% if dynos['worker']['size'] == '1x' %>selected<% end %>>1X</option>
+                  <option value="2x" <% if dynos['worker']['size'] == '2x' %>selected<% end %>>2X</option>
+                </select>
+                <input type="submit" value="Save">
+              </form>
+            <% end %>
+          <% end %>
+
+        </div>
+        <div style="clear:both;"></div>
+      </div>
       <% chart_id = "charts-#{id}" %>
       <div id="<%= chart_id %>" class="carousel slide">
         <!-- Indicators -->

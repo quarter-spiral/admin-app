@@ -5,6 +5,33 @@ require 'new_relic/agent/instrumentation/rack'
 module Admin
   module App
     class App < Sinatra::Base
+      HEROKU_APPS = {
+        'auth-backend' => {
+          "app" => "auth-backend"
+        },
+        'graph-backend' => {
+          "app" => "graph-backend"
+        },
+        'datastore-backend' => {
+          "app" => "datastore-backend"
+        },
+        'devcenter-backend' => {
+          "app" => "devcenter-backend"
+        },
+        'playercenter-backend' => {
+          "app" => "playercenter-backend"
+        },
+        'canvas-app' => {
+          "app" => "qs-canvas-app"
+        },
+        'sdk-app' => {
+          "app" => "sdk-app"
+        },
+        'friendbarus' => {
+          "app" => "friendbarus"
+        }
+      }
+
       class NewRelicMiddleware
         def initialize(app)
           @app = app
@@ -53,7 +80,32 @@ module Admin
         erb :admin
       end
 
+      post '/dynos/:app_id/:type' do
+        app_id = params['app_id']
+        type = params['type']
+        quantity = params['quantity']
+        size = params['size']
+
+        heroku_app = HEROKU_APPS[app_id]['app']
+        raise "No heroku app for #{app_id} found!" unless heroku_app
+
+        connection.heroku.app(heroku_app).scale(type, quantity, size)
+
+        redirect '/health'
+      end
+
       get '/health' do
+        dynos = {}
+
+        Thread.abort_on_exception = true
+        HEROKU_APPS.map do |internal_id, heroku_config|
+          Thread.new do
+            dynos[internal_id] = connection.heroku.app(heroku_config['app']).formation
+          end
+        end.each {|thread| thread.join}
+
+        @dynos = dynos
+
         @charts = {
           'auth-backend' => {
             'title' => 'Auth Backend',
