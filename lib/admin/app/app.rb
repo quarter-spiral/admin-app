@@ -60,6 +60,8 @@ module Admin
       end
 
       get '/dashboard' do
+        @active_tab = 'dashboard'
+
         @metrics = {
           'players' => '???',
           'plays' => connection.tracking.query_impression('game-played', :total) + connection.tracking.query_impression('game-played-registered-player', :total),
@@ -77,6 +79,8 @@ module Admin
       end
 
       get '/admin' do
+        @active_tab = 'admin'
+
         erb :admin
       end
 
@@ -95,6 +99,8 @@ module Admin
       end
 
       get '/health' do
+        @active_tab = 'health'
+
         dynos = {}
 
         Thread.abort_on_exception = true
