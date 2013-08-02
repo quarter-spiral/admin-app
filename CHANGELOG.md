@@ -1,4 +1,4 @@
-# 0.0.3 / Unreleased
+# 0.0.3 / 2013-08-02
 
 * Adds Heroku scaling controls
 
