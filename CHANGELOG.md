@@ -1,4 +1,4 @@
-# 0.0.4 / Unreleased
+# 0.0.4 / 2013-08-02
 
 * Makes tab highlighting real
 * Adds New Relic config
